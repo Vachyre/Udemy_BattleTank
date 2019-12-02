@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float Launchspeed = 100000; // TODO Find sensible launch speed
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
