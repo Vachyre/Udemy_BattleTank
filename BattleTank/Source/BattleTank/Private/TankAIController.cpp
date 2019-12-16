@@ -4,6 +4,7 @@
 #include "TankAIController.h"
 //Manual Includes
 #include "BattleTank.h"
+#include "Tank.h"
 
 void ATankAIController::BeginPlay()
 {

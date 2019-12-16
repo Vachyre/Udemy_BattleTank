@@ -5,6 +5,7 @@
 #include "BattleTank.h"
 #include "Math/Vector.h"
 #include "Engine/World.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
