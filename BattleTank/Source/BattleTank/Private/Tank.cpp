@@ -44,3 +44,10 @@ void ATank::AimAt(FVector HitLocation)
 	TankAimingComponent->AimAt(HitLocation, Launchspeed);
 }
 
+// Called when the Gun Fires
+void ATank::Fire()
+{
+	//TODO Firing code
+	UE_LOG(LogTemp, Warning, TEXT("Firing!"));
+}
+
