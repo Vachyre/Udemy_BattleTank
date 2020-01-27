@@ -27,6 +27,15 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
+void ATank::SetLeftTrackReference(UTankTrack* LeftTrackToSet)
+{
+	LeftTrack = LeftTrackToSet;
+}
+
+void ATank::SetRightTrackReference(UTankTrack* RightTrackToSet)
+{
+	RightTrack = RightTrackToSet;
+}
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
@@ -51,16 +60,21 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::Fire()
 {
 	//TODO Firing code
-	UE_LOG(LogTemp, Warning, TEXT("Firing!"));
-	
-	if (!Barrel) { return; }
-	//spawn a projectile at the tip of the barrel
-	FVector ProjectileSpawn = Barrel->GetSocketLocation(FName("Projectile"));
-	FRotator ProjectileRotation = Barrel->GetSocketRotation(FName("Projectile"));
-	GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBlueprint,
-		ProjectileSpawn,
-		ProjectileRotation);
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
+	
+	if (Barrel && isReloaded) 
+	{
+		//spawn a projectile at the tip of the barrel
+		FVector ProjectileSpawn = Barrel->GetSocketLocation(FName("Projectile"));
+		FRotator ProjectileRotation = Barrel->GetSocketRotation(FName("Projectile"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			ProjectileSpawn,
+			ProjectileRotation);
+
+		Projectile->LaunchProjectile(Launchspeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
 

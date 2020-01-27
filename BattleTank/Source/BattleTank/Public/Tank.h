@@ -8,6 +8,7 @@
 
 class UTankBarrel;  // Forward Declarations
 class UTankTurret;
+class UTankTrack;
 class UTankAimingComponent;
 class AProjectile;
 
@@ -28,13 +29,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetLeftTrackReference(UTankTrack* LeftTrackToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetRightTrackReference(UTankTrack* RightTrackToSet);
+
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
-
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float Launchspeed = 5000; // TODO Find sensible launch speed
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 2;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 protected:
@@ -51,4 +58,8 @@ public:
 private:
 	// Local Barrel reference for projectile
 	UTankBarrel* Barrel = nullptr;
+	UTankTrack* LeftTrack = nullptr;
+	UTankTrack * RightTrack = nullptr;
+
+	double LastFireTime = 0;
 };

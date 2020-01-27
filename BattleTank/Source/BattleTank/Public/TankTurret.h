@@ -18,7 +18,7 @@ public:
 	void Rotate(float RotateSpeed);
 
 private:
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float TurnSpeed = 25; // Sensible default
 	
 };
