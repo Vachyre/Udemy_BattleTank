@@ -64,7 +64,7 @@ private:
 	// Local Barrel reference for projectile
 	UTankBarrel* Barrel = nullptr;
 	UTankTrack* LeftTrack = nullptr;
-	UTankTrack * RightTrack = nullptr;
+	UTankTrack* RightTrack = nullptr;
 
 	double LastFireTime = 0;
 };
