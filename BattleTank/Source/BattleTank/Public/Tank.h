@@ -7,10 +7,7 @@
 #include "Tank.generated.h"  // put new includes above
 
 class UTankBarrel;  // Forward Declarations
-class UTankTurret;
-class UTankTrack;
 class UTankAimingComponent;
-class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -24,47 +21,32 @@ public:
 
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetLeftTrackReference(UTankTrack* LeftTrackToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetRightTrackReference(UTankTrack* RightTrackToSet);
 	//UFUNCTION(BlueprintCallable, Category = Setup)
 
 
-	UFUNCTION(BlueprintCallable, Category = Firing)
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float Launchspeed = 5000; // TODO Find sensible launch speed
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float ReloadTimeInSeconds = 2;
 
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileBlueprint;
+	// TODO Remove once firing is moved to aiming component
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float Launchspeed = 5000; // TODO Find sensible launch speed
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 2;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
+	virtual void BeginPlay() override;
 
 public:	
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 private:
-	// Local Barrel reference for projectile
+	// TODO Get rid of these!
 	UTankBarrel* Barrel = nullptr;
-	UTankTrack* LeftTrack = nullptr;
-	UTankTrack* RightTrack = nullptr;
+//	UTankTrack* LeftTrack = nullptr;
+//	UTankTrack* RightTrack = nullptr;
 
 	double LastFireTime = 0;
 };

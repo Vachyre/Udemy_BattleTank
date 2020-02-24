@@ -10,6 +10,7 @@
 
 //forward declarations
 class ATank;
+class UTankAimingComponent;
 
 /**
  * 
@@ -27,8 +28,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float LineTraceRange = 1000000;
 
-	ATank* GetControlledTank() const;
-
 	void BeginPlay() override;
 
 	// Called every frame
@@ -36,6 +35,9 @@ public:
 
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 
 private:
@@ -48,4 +50,6 @@ private:
 
 	FVector GetLookVectorEnd() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
 };
