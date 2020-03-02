@@ -7,7 +7,6 @@
 #include "Tank.generated.h"  // put new includes above
 
 class UTankBarrel;  // Forward Declarations
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -19,7 +18,7 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	void AimAt(FVector HitLocation);
+
 
 	//UFUNCTION(BlueprintCallable, Category = Setup)
 
@@ -35,18 +34,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-	virtual void BeginPlay() override;
-
-public:	
-
 private:
 	// TODO Get rid of these!
 	UTankBarrel* Barrel = nullptr;
 //	UTankTrack* LeftTrack = nullptr;
 //	UTankTrack* RightTrack = nullptr;
-
+	virtual void BeginPlay() override;
 	double LastFireTime = 0;
 };
