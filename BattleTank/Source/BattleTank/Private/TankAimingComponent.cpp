@@ -75,7 +75,7 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
-int UTankAimingComponent::GetAmmo() const
+int32 UTankAimingComponent::GetAmmo() const
 {
 	return Ammo;
 }
@@ -116,7 +116,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	else
 	{
 		auto Time = GetWorld()->GetTimeSeconds();
-		//UE_LOG(LogTemp, Warning, TEXT("%f: No Aim Solve Found"), Time);
+		UE_LOG(LogTemp, Warning, TEXT("%f: No Aim Solve Found"), Time);
+
 	}
 	// if no solution found do nothing
 }
