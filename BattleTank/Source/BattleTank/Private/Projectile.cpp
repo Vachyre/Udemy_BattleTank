@@ -25,7 +25,6 @@ void AProjectile::LaunchProjectile(float Speed)
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
