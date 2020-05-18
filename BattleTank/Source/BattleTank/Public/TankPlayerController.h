@@ -47,5 +47,10 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
+	virtual void SetPawn(APawn* InPawn) override;	//Makesure we have a relevant pawn to listen for the broadcast
+
 	FVector GetLookVectorEnd() const;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };
